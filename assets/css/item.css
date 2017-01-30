@@ -1,0 +1,27 @@
+.caldoza-control-item.processing{
+    min-width: 70px;
+    min-height: 70px;
+    position: relative;
+}
+.caldoza-control-item.processing:after {
+    content: " ";
+    position: absolute;
+    top: 50%;
+    left: 36px;
+    height: 70px;
+    width: 70px;
+    margin: -35px 0 0 -35px;
+    z-index: 100001;
+    opacity: 0;
+    visibility: hidden;
+
+}
+.caldoza-control-item.processing:after {
+    opacity: 1;
+    visibility: visible;
+}
+.caldoza-control.caldoza-control-item {
+    overflow: hidden;
+    padding-bottom: 12px;
+    position: relative;
+}

@@ -1,0 +1,32 @@
+{
+	
+	"namespace"		: "caldoza",
+	"plugin_name"	: "Caldoza License Manager",
+	"description"	: "License Manager for Caldoza.net plugins.",
+	"prefix"		: "CLDZA_LMAN",
+	"textdomain"	: "caldoza-license-manager",
+	"version"		: "1.0.0",
+	"author"		: "David Cramer",
+	"url"			: "http://cramer.co.za",
+	"license"		: "GPLv2+",
+
+
+	"repository"	: {
+		"type"		: "git",
+		"url"		: "https://github.com/Desertsnowman/uix-plugin"
+	},
+	"bugs"			: {
+		"url"		: "https://github.com/Desertsnowman/uix-plugin/issues"
+	},
+	"devDependencies"			: {
+		"grunt"					: "~0.4.2",
+		"grunt-git"				: "^0.3.3",
+		"grunt-shell"			: "^1.1.1",
+		"grunt-contrib-copy"	: "^0.7.0",
+		"grunt-contrib-clean"	: "~0.7.0",
+		"grunt-text-replace"	: "^0.4.0"
+	},
+	"scripts"		: {
+		"install"	: "grunt uix"
+	}
+}

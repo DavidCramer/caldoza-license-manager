@@ -1,0 +1,299 @@
+
+.caldoza-modal-wrap .spinner.loading {
+    background-position: center center;
+    display: inline-block;
+    float: none;
+    height: auto;
+    position: absolute;
+    width: auto;
+}
+
+/* MODALS */
+html.has-caldoza-modal-{
+    overflow: hidden;
+}
+body{
+    overflow-y: scroll;
+}
+.caldoza-backdrop {
+    background: rgba(0,0,0,0.3);
+    bottom: 0;
+    display: block;
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 100100;
+}
+.caldoza-modal-wrap {
+    background-color: #FFFFFF;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+    display: block;
+    position: absolute;
+    margin: 0 auto;
+    z-index: 100105;
+}
+.caldoza-modal-blocker {
+    background: rgba(0, 0, 0, 0.15) none repeat scroll 0 0;
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 1;
+}
+.caldoza-modal-wrap.caldoza-animate{
+    transform:  translate(0,0) !important;
+}
+
+.caldoza-modal-closer {
+    color: #fff;
+    position: absolute;
+    right: 0;
+    top: 0;
+    font-size: 32px;
+    text-decoration: none !important;
+    line-height: 0;
+    border: 0;
+    height: 7px;
+}
+.caldoza-modal-closer:hover {
+    background-color: rgba(0,0,0,.1);
+    color: #fff;
+}
+
+.caldoza-modal-title > h3 {
+    font-weight: 400;
+    margin: 0;
+    padding: 12px 40px 12px 12px;
+    clear: none;
+    background: rgb(195, 0, 40);
+    color: #fff;
+}
+
+.caldoza-modal-body {
+    -moz-box-sizing:    border-box;   /* Firefox 1, probably can drop this */
+    -webkit-box-sizing: border-box;   /* Safari 3-4, also probably droppable */
+    box-sizing:        border-box;   /* Everything else */
+    overflow: auto;
+}
+
+.caldoza-modal-body.has-buttons{
+    bottom: 53px;
+}
+.caldoza-modal-footer {
+    text-align: right;
+    background: none repeat scroll 0 0 #EFEFEF;
+    border-top: 1px solid #E0E0E0;
+}
+
+
+@media (max-width: 600px) {
+    /* Small Screens */
+    .caldoza-modal-wrap.caldoza-front-modal-wrap{
+        bottom: 0;
+        display: block;
+        left: 0;
+        margin: 0 !important;
+        overflow: auto;
+        padding: 0 !important;
+        top: 0;
+        width: 100% !important;
+    }
+}
+
+
+
+.caldoza-sticky-modal{
+    z-index: 100099;
+    position: fixed;
+}
+.caldoza-sticky-modal > .caldoza-modal-title{ cursor: pointer; }
+.caldoza-sticky-modal.bottom-left{ bottom: 0; left: 0; }
+.caldoza-sticky-modal.bottom-right{ bottom: 0; right: 0; }
+.caldoza-sticky-modal.top-left{ top: 0; left: 0; }
+.caldoza-sticky-modal.top-right{ top: 0; right: 0; }
+
+.caldoza-sticky-modal.top-left .caldoza-modal-title ,
+.caldoza-sticky-modal.top-right .caldoza-modal-title {
+    border-bottom: 0;
+    border-top: 1px solid #EFEFEF;
+}
+
+
+
+
+.caldoza-modal-content {
+    box-sizing: border-box;
+    height: 100%;
+}
+
+.caldoza-modal-footer .caldoza-control{
+    display: inline-block;
+    margin: 0;
+}
+
+.caldoza-modal-footer .caldoza-control.caldoza-control-separator{
+    position: relative;
+    width:23px;
+}
+.caldoza-modal-footer .caldoza-control.caldoza-control-separator label{
+    display: none;
+}
+.caldoza-modal-footer .caldoza-control.caldoza-control-separator .caldoza-control-input::before{
+    background: rgba(0, 0, 0, 0.1) none repeat scroll 0 0;
+    bottom: -21px;
+    content: "";
+    display: inline-block;
+    left: 12px;
+    position: absolute;
+    top: -13px;
+    width: 1px;
+}
+.caldoza-modal-footer .caldoza-control-input {
+    min-width: auto;
+}
+.caldoza-modal-footer .caldoza-control.caldoza-control-separator hr{
+    display: none;
+}
+.caldoza-modal-body .caldoza-control-text .caldoza-control-input {
+    min-width: 100%;
+    width: 100%;
+}
+.caldoza-modal-body .caldoza-control-input input.regular-text{
+    width: 100%;
+}
+.caldoza-modal-content > .caldoza-has-tabs.caldoza-panel-inside {
+    background-color: #fff;
+    box-sizing: border-box;
+    height: 100%;
+    position: relative;
+}
+.caldoza-modal-body .caldoza-modal-sections {
+    box-sizing: border-box;
+    height: 100%;
+    overflow: auto;
+    padding: 12px;
+}
+.caldoza-modal-content > .caldoza-has-tabs.caldoza-panel-inside{
+    border: none;
+}
+.caldoza-modal-tabs.caldoza-panel-tabs {
+    height: 100%;
+    overflow: auto;
+}
+.caldoza-top-tabs .caldoza-modal-tabs.caldoza-panel-tabs {
+    height: auto;
+    margin-top: -3px;
+}
+.caldoza-modal-body .caldoza-top-tabs .caldoza-modal-sections {
+    top: 38px;
+    height: auto;
+    bottom: 0;
+    overflow: auto;
+    position: absolute;
+}
+.caldoza-modal-body .caldoza-control-separator .caldoza-control-label {
+    width: 120px;
+}
+.caldoza-modal-footer .caldoza-control-label {
+    margin: 3px 6px 0 0;
+    width: auto;
+}
+
+.caldoza-modal-wrap .notice.error {
+    box-shadow: 0 5px 21px rgba(0, 0, 0, 0.3);
+    left: 0;
+    margin: 5px 8px;
+    position: absolute;
+    right: 0;
+    top: 37px;
+}
+
+
+.caldoza-modal-wrap.processing > .caldoza-modal-body{
+    position: relative;
+}
+.caldoza-modal-wrap.processing > .caldoza-modal-body{
+    min-width: 70px;
+    min-height: 70px;
+}
+.caldoza-modal-wrap.processing > .caldoza-modal-body > .caldoza-modal-content{
+    opacity: 0.5;
+}
+.caldoza-modal-wrap > .caldoza-modal-body:after {
+    content: " ";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    height: 70px;
+    width: 70px;
+    margin: -35px 0 0 -35px;
+    z-index: 100001;
+    opacity: 0;
+    visibility: hidden;
+
+}
+.caldoza-modal-wrap.processing > .caldoza-modal-body:after {
+    opacity: 1;
+    visibility: visible;
+}
+
+.caldoza-modal-wrap .caldoza-post-relation-panel {
+    border: 1px solid #ddd;
+    border-top:0;
+    display: none;
+    padding: 6px;
+    background: #fff none repeat scroll 0 0;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+    left: 12px;
+    position: absolute;
+    right: 12px;
+}
+.caldoza-modal-body .notice, .caldoza-modal-body div.error, .caldoza-modal-body div.updated {
+    background: #fff none repeat scroll 0 0;
+    border-left: 4px solid #fff;
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
+    margin: 5px 15px 2px;
+    padding: 1px 12px;
+    border-left-color: #dc3232;
+}
+.caldoza-modal-body .notice-error, .caldoza-modal-body div.error {
+    border-left-color: #dc3232;
+}
+.caldoza-modal-body .notice-dismiss::before {
+    background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+    color: #b4b9be;
+    content: "";
+    display: block;
+    font: 400 16px/20px dashicons;
+    height: 20px;
+    text-align: center;
+    width: 20px;
+}
+.caldoza-modal-body .notice-dismiss {
+    background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+    border: medium none;
+    color: #b4b9be;
+    cursor: pointer;
+    margin: 0;
+    padding: 9px;
+    position: absolute;
+    right: 1px;
+    top: 0;
+}
+.caldoza-modal-body .screen-reader-text, .caldoza-modal-body .screen-reader-text span, .caldoza-modal-body .ui-helper-hidden-accessible {
+    border: 0 none;
+    clip: rect(0px, 0px, 0px, 0px);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    overflow-wrap: normal !important;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
+.caldoza-modal-body .notice p, .caldoza-modal-body .notice-title, .caldoza-modal-body div.error p, .caldoza-modal-body div.updated p {
+    margin: 0.5em 0;
+    padding: 2px;
+}

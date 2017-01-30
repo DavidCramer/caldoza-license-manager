@@ -1,0 +1,22 @@
+.caldoza-ajax.spinner {
+    display: inline-block;
+    margin: 0 0 4px 12px;
+    visibility: visible;
+}
+.caldoza-ajax.inline {
+    float: none;
+}
+.caldoza-ajax.dashicons-yes {
+    color: #689f38;
+    font-size: 30px;
+    margin-left: 8px;
+}
+.caldoza-ajax button.disabled {
+    color: #9f9f9f !important;
+}
+.caldoza-ajax button.disabled:hover {
+    background: #efefef !important;
+}
+.ajax-triggered {
+    opacity: 0.6;
+}
