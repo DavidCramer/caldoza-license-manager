@@ -15,6 +15,9 @@ var CLDZA_LMAN = {};
             // main init
             $(document).trigger('caldoza.init');
         });
+        $(document).on('change', '[data-default]', function () {
+            $(this).data('default', this.value);
+        });
     });
 
 
