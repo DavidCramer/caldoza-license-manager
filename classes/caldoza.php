@@ -207,22 +207,18 @@ class Caldoza {
 	public function admin_core_page() {
 
 		$structure = array(
-			'page_title' => __( 'Caldoza License Manager', 'caldoza-license-manager' ),
-			'menu_title' => __( 'Caldoza License Manager', 'caldoza-license-manager' ),
+			'page_title' => __( 'Caldoza.net License Manager', 'caldoza-license-manager' ),
+			'menu_title' => __( 'Caldoza.net Licensing', 'caldoza-license-manager' ),
 			'base_color' => '#1565C0',
+			'parent'     => 'options-general.php',
 			'full_width' => true,
 			'attributes' => array(
 				'data-autosave' => true,
 			),
 			'header'     => array(
 				'id'          => 'admin_header',
-				'label'       => __( 'Caldoza License Manager', 'caldoza-license-manager' ),
+				'label'       => __( 'Caldoza.net License Manager', 'caldoza-license-manager' ),
 				'description' => __( '1.0.0', 'caldoza-license-manager' ),
-				'control'     => array(
-					array(
-						'type' => 'separator',
-					),
-				),
 			),
 			'style'      => array(
 				'admin' => CLDZA_LMAN_URL . 'assets/css/admin.css',
