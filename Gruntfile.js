@@ -1,90 +1,102 @@
 module.exports = function (grunt) {
-    // Project configuration.
 
+    // Project configuration.
     grunt.initConfig({
-        pkg     : grunt.file.readJSON( 'package.json' ),
-        gitclone: {
-            clone: {
-                options: {
-                    repository: 'https://github.com/Desertsnowman/uix',
-                    branch: '3.0.x',
-                    directory: 'uix-install'
-                }
+        pkg: grunt.file.readJSON('package.json'),
+        uglify: {
+            min: {
+                files: grunt.file.expandMapping([
+                    'assets/js/*.js',
+                    '!assets/js/*.min.js',
+                    '!assets/js/*.min-latest.js'
+                ], 'assets/js/', {
+                    rename: function (destBase, destPath) {
+                        return destBase + destPath.replace('.js', '.min.js');
+                    },
+                    flatten: true
+                })
             }
         },
-        shell: {
-            install: {
-                command: 'npm install --prefix ./uix-install'
+        cssmin: {
+            options: {
+                keepSpecialComments: 0
             },
-            build: {
-                command: "grunt --slug=<%= pkg.namespace %> --base ./uix-install --gruntfile ./uix-install/GruntFile.js default"
+            minify: {
+                expand: true,
+                cwd: 'assets/css/',
+                src: ['*.css', '!*.min.css'],
+                dest: 'assets/css/',
+                ext: '.min.css'
             }
         },
-        replace : {
-            plugin_file: {
-                src: [ '*.php', 'includes/**/*.php', 'classes/**/*.php','assets/**/*.css','assets/**/*.js' ],
-                overwrite: true,
-                replacements: [
-                    {
-                        from: "%namespace%",
-                        to: "<%= pkg.namespace %>"
-                    },
-                    {
-                        from: "%slug%",
-                        to: "<%= pkg.slug %>"
-                    },
-                    {
-                        from: "%prefix%",
-                        to: "<%= pkg.prefix %>"
-                    },
-                    {
-                        from: "%name%",
-                        to: "<%= pkg.plugin_name %>"
-                    },
-                    {
-                        from: "%description%",
-                        to: "<%= pkg.description %>"
-                    },
-                    {
-                        from: "%author%",
-                        to: "<%= pkg.author %>"
-                    },
-                    {
-                        from: "%url%",
-                        to: "<%= pkg.url %>"
-                    },
-                    {
-                        from: "%version%",
-                        to: "<%= pkg.version %>"
-                    },
-                    {
-                        from: "text-domain",
-                        to: "<%= pkg.textdomain %>"
-                    },
-                    {
-                        from: 'uix',
-                        to: "<%= pkg.namespace %>"
-                    },
-                    {
-                        from: 'UIX',
-                        to: "<%= pkg.prefix %>"
-                    }
+        clean: ['build/'],
+        copy: {
+            build: {
+                options: {
+                    mode: true
+                },
+                src: [
+                    '**',
+                    '!node_modules/**',
+                    '!releases/**',
+                    '!bin/**',
+                    '!build/**',
+                    '!releases/**',
+                    '!.git/**',
+                    '!Gruntfile.js',
+                    '!package.json',
+                    '!.gitignore',
+                    '!.gitmodules',
+                    '!.gitattributes',
+                    '!composer.lock',
+                    '!naming-conventions.txt',
+                    '!how-to-grunt.md',
+                    '!.travis.yml',
+                    '!.scrutinizer.yml',
+                    '!phpunit.xml',
+                    '!tests/**'
+                ],
+                dest: 'build/<%= pkg.textdomain %>/'
+            }
+        },
+        compress: {
+            main: {
+                options: {
+                    mode: 'zip',
+                    archive: 'releases/<%= pkg.textdomain %>-<%= pkg.version %>.zip'
+                },
+                expand: true,
+                cwd: 'build/',
+                src: [
+                    '**/*',
+                    '!build/*'
                 ]
             }
         },
-        clean: {
-            installer: ["uix-install/**", "uix-plugin.php"],
+        replace: {
+            core_file: {
+                src: ['plugincore.php'],
+                overwrite: true,
+                replacements: [{
+                    from: /Version:\s*(.*)/,
+                    to: "Version: <%= pkg.version %>"
+                }, {
+                    from: /define\(\s*'DBPT_VER',\s*'(.*)'\s*\);/,
+                    to: "define( 'DBPT_VER', '<%= pkg.version %>' );"
+                }]
+            }
         }
     });
 
     //load modules
-    grunt.loadNpmTasks( 'grunt-shell');
-    grunt.loadNpmTasks( 'grunt-contrib-copy' );
-    grunt.loadNpmTasks( 'grunt-git' );
-    grunt.loadNpmTasks( 'grunt-text-replace' );
-    grunt.loadNpmTasks( 'grunt-contrib-clean' );
+    grunt.loadNpmTasks('grunt-contrib-cssmin');
+    grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-contrib-clean');
+    grunt.loadNpmTasks('grunt-contrib-copy');
+    grunt.loadNpmTasks('grunt-contrib-compress');
+    grunt.loadNpmTasks('grunt-text-replace');
+    //installer tasks
+    grunt.registerTask('default', ['clean', 'replace', 'cssmin', 'uglify']);
 
-    //register default task
-    grunt.registerTask( 'uix', [ 'gitclone', 'shell', 'clean', 'replace' ] );
 
 };
