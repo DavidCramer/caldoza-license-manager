@@ -254,26 +254,51 @@ class Caldoza {
 	 *
 	 */
 	public function update_plugin() {
-
-		$data = $this->admin_page->child['license']->get_data();
-		if ( ! is_array( $data['license'] ) ) {
-			$data = json_decode( $data['license'], ARRAY_A );
-		}
-		$license_key = '';
-		if ( ! empty( $data[0]['license']['key'] ) ) {
-			$license_key = trim( $data[0]['license']['key'] );
-		}
-
-		// setup the updater
-		$edd_updater = new EDD_SL_Plugin_Updater( DBPT_STORE_URL, DBPT_CORE, array(
-				'version'   => DBPT_VER,
-				'license'   => $license_key,
-				'item_name' => 'DB Post Types',
-				'author'    => 'David Cramer',
+		$licenses = $this->get_licensed();
+		foreach ( $licenses as $slug => $license ) {
+			if ( empty( $license['plugin'] ) ) {
+				continue;
+			}
+			$args = array(
+				'version'   => $license['plugin']['version'],
+				'license'   => $license['key'],
+				'item_name' => $license['plugin']['item_name'],
+				'author'    => $license['plugin']['author'],
 				'beta'      => false,
-			)
-		);
+			);
+			// setup the updater
+			$edd_updater = new EDD_SL_Plugin_Updater( 'https://caldoza.net/', $license['plugin']['core'], $args );
+		}
+	}
 
+	/**
+	 * get licensed plugins
+	 *
+	 * @since 1.0.0
+	 *
+	 */
+	private function get_licensed() {
+		$data         = $this->admin_page->load_data();
+		$licenses     = array();
+		$raw_licenses = array();
+		if ( ! empty( $data['license']['license'] ) ) {
+			$raw_licenses = $data['license']['license'];
+			if ( ! is_array( $raw_licenses ) ) {
+				$raw_licenses = json_decode( $raw_licenses, ARRAY_A );
+			}
+		}
+
+		foreach ( $raw_licenses as $license ) {
+			if ( empty( $license['license'] ) ) {
+				continue;
+			}
+			$plugin                                              = $this->get_plugin( $license['license']['plugin'] );
+			$licenses[ $license['license']['plugin'] ]           = $license['license'];
+			$licenses[ $license['license']['plugin'] ]['plugin'] = $plugin;
+
+		}
+
+		return $licenses;
 	}
 }
 

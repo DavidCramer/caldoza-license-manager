@@ -10,7 +10,6 @@ var CLDZA_LMAN = {};
                 field.val(field.data('default'));
             });
         });
-
        $( window ).load( function() {
             // main init
             $(document).trigger('caldoza.init');
