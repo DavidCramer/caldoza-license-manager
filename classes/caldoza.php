@@ -90,14 +90,14 @@ class Caldoza {
 					'url'        => get_home_url(),
 				),
 			);
-			$request = wp_remote_get( DBPT_STORE_URL, $args );
+			$request = wp_remote_get( 'https://caldoza.net/', $args );
 			if ( is_wp_error( $request ) ) {
 				$message[] = $request->get_error_message();
 			} else {
 				// vet message
 				$check_license = json_decode( wp_remote_retrieve_body( $request ), ARRAY_A );
 				if ( empty( $check_license ) ) {
-					$message[] = __( 'invalid response', 'db-post-types' );
+					$message[] = __( 'invalid response', 'caldoza' );
 				} else {
 					//check
 					switch ( $check_license['license'] ) {
@@ -108,34 +108,34 @@ class Caldoza {
 							);
 							break;
 						case 'revoked' :
-							$message[] = __( 'Your license key has been disabled.', 'db-post-types' );
+							$message[] = __( 'Your license key has been disabled.', 'caldoza' );
 							break;
 
 						case 'missing' :
-							$message[] = __( 'Invalid license.', 'db-post-types' );
+							$message[] = __( 'Invalid license.', 'caldoza' );
 							break;
 
 						case 'invalid' :
 						case 'site_inactive' :
-							$message[] = __( 'Your license is not active for this URL.', 'db-post-types' );
+							$message[] = __( 'Your license is not active for this URL.', 'caldoza' );
 							break;
 
 						case 'item_name_mismatch' :
-							$message[] = sprintf( __( 'This appears to be an invalid license key for %s.', 'db-post-types' ), 'DB Post Types' );
+							$message[] = __( 'This appears to be an invalid license key.', 'caldoza' );
 							break;
 
 						case 'no_activations_left':
-							$message[] = __( 'Your license key has reached its activation limit.', 'db-post-types' );
+							$message[] = __( 'Your license key has reached its activation limit.', 'caldoza' );
 							break;
 
 						default :
-							$message[] = __( 'An error occurred, please try again.', 'db-post-types' );
+							$message[] = __( 'An error occurred, please try again.', 'caldoza' );
 							break;
 
 						case 'inactive':
 						case 'valid':
 							$args['body']['edd_action'] = 'activate_license';
-							$request                    = wp_remote_get( DBPT_STORE_URL, $args );
+							$request                    = wp_remote_get( 'https://caldoza.net/', $args );
 							if ( is_wp_error( $request ) ) {
 								$message[] = $request->get_error_message();
 							} else {
